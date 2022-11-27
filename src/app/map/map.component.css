@@ -1,0 +1,18 @@
+.map-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50vh;
+  height: 50vh;
+  margin: 10px;
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
