@@ -10,13 +10,13 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
 
       
-        <input type="text" name="reporterName" placeholder="Reporter Name (required)" formControlName="reporterName" autocomplete="off" required>
+        <input type="text" name="reporterName" placeholder="Reporter Name (required and cannot be empty string)" formControlName="reporterName" autocomplete="off" required>
+        <br>
+
+        <input type="tel" name="reporterPhoneNum" minlength="10" placeholder="Reporter Phone Number (required and positive 10 digits Canadian number)" formControlName="reporterPhoneNum" autocomplete="off" required>
 
         <br>
-        <input type="tel" name="reporterPhoneNum" placeholder="Reporter Phone Number (required)" formControlName="reporterPhoneNum" autocomplete="off" required>
-
-        <br>
-        <input type="number" name="pigId" placeholder="Pig ID (required)" formControlName="pigId" autocomplete="off" required>
+        <input type="number" min="1" name="pigId" placeholder="Pig ID (required and must be positive)" formControlName="pigId" autocomplete="off" required>
         
         <br>
         <label for="pigBreed">Choose the pig breed (required)</label>
@@ -38,14 +38,14 @@
         </select>
 
         <br>
-        <label for="dateTime">Choose the date and time found (required)</label>
+        <label for="dateTime">Choose the date and time found (required and cannot be in the future)</label>
         <input type="datetime-local" name="dateTime" placeholder="Date Time (required)" autocomplete="off" formControlName="dateTime" required>
 
         <br>
         <input type="text" placeholder="notes (optional)" formControlName="notes">
 
         <input type="submit" name="submitButton" [disabled]="!form.valid" value="SUBMIT">
-          
+
 
       </form>
 

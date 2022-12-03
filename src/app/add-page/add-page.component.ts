@@ -24,10 +24,12 @@ export class AddPageComponent implements OnInit {
         Validators.required
       ]),
       reporterPhoneNum: new FormControl('',[
-        Validators.required
+        Validators.required,
+        this.reportValidator
       ]),
       pigId: new FormControl('',[
-        Validators.required
+        Validators.required,
+        this.reportValidator
       ]),
       pigBreed: new FormControl('',[
         Validators.required
@@ -46,11 +48,16 @@ export class AddPageComponent implements OnInit {
     this.locations = []
   }
   reportValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const name = control.get("reporterName")
-    // const instructor = control.get("instructor")
-    // const valid_instr_names = ['bobby', 'john', 'sara']
+    const name = control.get("reporterName");
+    const pigId = +control.get("pigId");
+    if (pigId < 0) {
+      return { pigId_error: "pigId cannot be negative" }
+    }
+    const reporterPhoneNum = +control.get("reporterPhoneNum");
+    if (reporterPhoneNum < 0) {
+      return { reporterPhoneNum_error: "reporter phone number cannot be negative"}
+    }
     return null;
-
   }
 
   
@@ -69,10 +76,21 @@ export class AddPageComponent implements OnInit {
   }
 
   onSubmit(report: PigReport){
+    if (new Date(report.dateTime) > new Date()) {
+      alert("Error Date: report not submitted. Report has date and time that is in the future.")
+      return;
+    }
+
     report.status = "Ready for pickup"
     report.dateTime = new Date(report.dateTime).toLocaleString();
     this.rs.getReports().subscribe((data:any) => {
       let reports: PigReport[] = data.data;
+      for (let i = 0; i < reports.length; i++) {
+        if (reports[i].pigId == report.pigId && reports[i].pigBreed != report.pigBreed) {
+          alert("Error Pig Breed: report not submitted. Earlier report(s) have the same pig id with different pig breed!")
+          return;
+        }
+      }
       let currentId = 0;
       for (let i = 0; i < reports.length; i++) {
         if (reports[i].id > currentId) {

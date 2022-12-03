@@ -29,26 +29,13 @@ export class ReportsService implements OnInit {
   collection = "pig-locator"
   apiURL = `https://272.selfip.net/apps/${this.appKey}/collections/${this.collection}/documents/`;
 
-  // reports;
-
-  locations = {
-    "SFU Metrotown":  [49.2276, -123.0076],
-    "SFU Surrey": [49.1867, -122.8490]
-  }
   constructor(private http: HttpClient) {
-    // this.reports = []
    }
 
   ngOnInit() {
     // this.initialize(); 
   }
 
-  // initialize(): void {
-  //   this.http.get<Object>(`https://272.selfip.net/apps/${this.appKey}/collections/${this.collection}/documents/reports`).subscribe((data:any)=>{
-  //     this.reports = data.data
-  //     console.log("HAHA", this.reports)
-  //   })
-  // }
   getReports() : Observable<any> {
     return this.http.get<Object>(`${this.apiURL}/reports`);
   }

@@ -27,19 +27,32 @@ export class MapComponent implements AfterViewInit {
     }).addEventListener('click', e => {
       let locationName = prompt(`Location Information ${e.latlng} \n What location name do you want to name?`)
       while (locationName.trim() == "") {
-        
+
       }
       if (locationName.trim() == "") {
         alert("Location name cannot be empty string");
         return;
       }
       this.rs.getLocations().subscribe((data: any) => {
-        console.log(data);
         let locations = data.data;
-        locations[locationName] = [e.latlng.lat, e.latlng.lng]
-        this.rs.putLocations(locations).subscribe(() => {
-          this.router.navigate["/"]
-        })
+        let locationNames = Object.keys(locations);
+        let uniqueName = true;
+        for (let name of locationNames) {
+          if (name.toLocaleLowerCase().trim() == locationName.toLocaleLowerCase().trim()) {
+            uniqueName = false;
+          }
+        }
+
+        if (!uniqueName) {
+          alert("Location not added because name is not unique!")
+        } else {
+          alert("LAH");
+          // locations[locationName] = [e.latlng.lat, e.latlng.lng]))))))))
+          // this.rs.putLocations(locations).subscribe(() => {
+          //   this.router.navigate["/"]
+          // })
+        }
+
       }) 
 
     });
@@ -52,6 +65,7 @@ export class MapComponent implements AfterViewInit {
       tileSize: 512,
       zoomOffset: -1
     }).addTo(this.map);
+
     this.rs.getLocations().subscribe(
       (data: any) => {
         let locsCount = {}
