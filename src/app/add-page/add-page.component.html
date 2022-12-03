@@ -1,0 +1,57 @@
+<div class="wrapper">
+  <div class="signUpContainer">
+
+    <div class="header">
+      <h3>Pig Report Form</h3>
+    </div>
+
+    <div class="loginForm">
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+
+      
+        <input type="text" name="reporterName" placeholder="Reporter Name (required)" formControlName="reporterName" autocomplete="off" required>
+
+        <br>
+        <input type="tel" name="reporterPhoneNum" placeholder="Reporter Phone Number (required)" formControlName="reporterPhoneNum" autocomplete="off" required>
+
+        <br>
+        <input type="number" name="pigId" placeholder="Pig ID (required)" formControlName="pigId" autocomplete="off" required>
+        
+        <br>
+        <label for="pigBreed">Choose the pig breed (required)</label>
+        <select name="pigBreed" id="pigBreed" formControlName="pigBreed">
+          <option value="Greyrat" selected>Greyrat</option>
+          <option value="Greycat">Greycat</option>
+          <option value="Pignut">Pignut</option>
+          <option value="Chestpig">Chestpig</option>
+          <option value="Yorkshire">Yorkshire</option>
+          <option value="Snowpig">Snowpig</option>
+          <option value="Pork bellied">Pork bellied</option>
+          <option value="Kuropig">Kuropig</option>
+        </select>
+
+        <br>
+        <label for="location">Choose the location (required)</label>
+        <select name="location" id="location" formControlName="location">
+          <option *ngFor="let loc of locations" value="{{loc.name}}">{{loc.name}} [{{loc.lat}}, {{loc.lng}}]</option>
+        </select>
+
+        <br>
+        <label for="dateTime">Choose the date and time found (required)</label>
+        <input type="datetime-local" name="dateTime" placeholder="Date Time (required)" autocomplete="off" formControlName="dateTime" required>
+
+        <br>
+        <input type="text" placeholder="notes (optional)" formControlName="notes">
+
+        <input type="submit" name="submitButton" [disabled]="!form.valid" value="SUBMIT">
+          
+
+      </form>
+
+
+    </div>
+
+  </div>
+
+</div>

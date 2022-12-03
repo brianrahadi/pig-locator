@@ -8,9 +8,18 @@ import { MapComponent } from './map/map.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
-import { AddReportButtonComponent } from './add-report-button/add-report-button.component';
-import { MatDialogModule } from '@angular/material/dialog';
-// import { AddReportDialogComponent } from './add-report-dialog/add-report-dialog.component';
+import { RoutingModule } from './routing.module';
+import { HomeComponent } from './home/home.component';
+import { AddPageComponent } from './add-page/add-page.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import { TableExpandableRowsExample } from './expand-table/expand-table.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MaterialModule } from './material/material.module';
+import { InfoPageComponent } from './info-page/info-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LocationPageComponent } from './location-page/location-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,8 +28,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReportTableComponent,
     PigReportComponent,
     MapComponent,
-    // AddReportDialogComponent,
-    AddReportButtonComponent
+    HomeComponent,
+    AddPageComponent,
+    TableExpandableRowsExample,
+    InfoPageComponent,
+    LocationPageComponent,
   ],
   // entryComponents: [AddReportDialogComponent, AddReportButtonComponent],
   imports: [
@@ -28,7 +40,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
-    MatDialogModule
+    RoutingModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatExpansionModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

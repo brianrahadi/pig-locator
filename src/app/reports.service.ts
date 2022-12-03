@@ -1,43 +1,90 @@
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AfterViewInit, Injectable, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+export interface PigReport {
+  id: number;
+  reporterName: string;
+  reporterPhoneNum: number;
+  pigId: number;
+  pigBreed: string;
+  location: string;
+  notes: string;
+  dateTime: string;
+  status: string;
+}
+
+export interface Location {
+  name: string,
+  lat: number,
+  lng: number
+};
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReportsService {
-  reports = [
-    {
-      name: "Bobby",
-      phoneNum: 2365912034,
-      pigBreed: "Lavender",
-      location: [49.2276, -123.0076],
-      notes: 'Hehe',
-      dateTime: new Date(),
-      status: 'retrieved'
-    },
-    {
-      name: "Sarah",
-      phoneNum: 2365913023,
-      pigBreed: "Greyrat",
-      location: [49.2276, -123.0076],
-      notes: 'Haha',
-      dateTime: new Date(),
-      status: 'retrieved'
-    }
-  ]
-  constructor() { }
+export class ReportsService implements OnInit {
+  appKey = "P1XsZ7lIRH";
+  collection = "pig-locator"
+  apiURL = `https://272.selfip.net/apps/${this.appKey}/collections/${this.collection}/documents/`;
 
-  get(){
-    return this.reports
+  // reports;
+
+  locations = {
+    "SFU Metrotown":  [49.2276, -123.0076],
+    "SFU Surrey": [49.1867, -122.8490]
+  }
+  constructor(private http: HttpClient) {
+    // this.reports = []
+   }
+
+  ngOnInit() {
+    // this.initialize(); 
   }
 
-  add(report){
-    // person.added_on = (new Date()).getTime()
-    // this.people.push(person)
-    // console.log(this.people)
+  // initialize(): void {
+  //   this.http.get<Object>(`https://272.selfip.net/apps/${this.appKey}/collections/${this.collection}/documents/reports`).subscribe((data:any)=>{
+  //     this.reports = data.data
+  //     console.log("HAHA", this.reports)
+  //   })
+  // }
+  getReports() : Observable<any> {
+    return this.http.get<Object>(`${this.apiURL}/reports`);
   }
 
-  delete(del_person:string){
-    // this.people = this.people.filter(p=>p.name!==del_person)
-    // console.log(this.people)
-    // return this.people
-  }}
+  putReports(reports: PigReport[]) : Observable<any> {
+    return this.http.put(`${this.apiURL}/reports`, {"key": "reports", "data": reports}, {headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })});
+  }
+
+  // not used
+  // deleteReports() : Observable<any> {
+  //   return this.http.delete(`${this.apiURL}/reports`);
+  // }
+
+  getLocations() : Observable<any>{
+    return this.http.get<Object>(`${this.apiURL}/locations`);
+  }
+
+  putLocations(locations: any[]) : Observable<any> {
+    return this.http.put(`${this.apiURL}/locations`, {"key": "locations", "data": locations}, {headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })});
+  }
+
+  // getLatLng(location: string) {
+  //   return this.locations[location];
+  // }
+
+  // getLocationsCount() {
+    // let locsCount = {}
+    // Object.keys(this.locations).forEach( loc => locsCount[loc] = 0);
+    // this.reports.forEach( rep => locsCount[rep.location] += 1);
+    // return locsCount;
+  // }
+
+  
+
+}

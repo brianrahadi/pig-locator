@@ -1,11 +1,11 @@
 .map-container {
-  position: sticky;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
   bottom: 50vh;
-  height: 50vh;
-  margin: 10px;
+  height: 100%;
+  margin: 20px;
 }
 
 .map-frame {

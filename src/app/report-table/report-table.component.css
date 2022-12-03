@@ -7,3 +7,11 @@ table.mat-table {
 th.mat-sort-header-sorted {
   color: black;
 }
+
+.edit {
+  color: blue;
+}
+
+.delete {
+  color: red;
+}
