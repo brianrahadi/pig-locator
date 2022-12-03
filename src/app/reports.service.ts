@@ -2,6 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AfterViewInit, Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
+export interface DialogResult {
+  value: string,
+  okClicked: boolean
+}
+
 export interface PigReport {
   id: number;
   reporterName: string;
@@ -36,8 +41,8 @@ export class ReportsService implements OnInit {
     // this.initialize(); 
   }
 
-  getReports() : Observable<any> {
-    return this.http.get<Object>(`${this.apiURL}/reports`);
+  getReports() : Observable<PigReport[]> {
+    return this.http.get<PigReport[]>(`${this.apiURL}/reports`);
   }
 
   putReports(reports: PigReport[]) : Observable<any> {
@@ -51,16 +56,19 @@ export class ReportsService implements OnInit {
   //   return this.http.delete(`${this.apiURL}/reports`);
   // }
 
-  getLocations() : Observable<any>{
+  getLocations() : Observable<Object>{
     return this.http.get<Object>(`${this.apiURL}/locations`);
   }
 
-  putLocations(locations: any[]) : Observable<any> {
+  putLocations(locations: any[]) : Observable<Object> {
     return this.http.put(`${this.apiURL}/locations`, {"key": "locations", "data": locations}, {headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })});
   }
 
+  hashPassword(password: string) : Observable<Object> {
+    return this.http.get<Object>(`https://api.hashify.net/hash/md5/hex?value=${password}`);
+  }
   // getLatLng(location: string) {
   //   return this.locations[location];
   // }

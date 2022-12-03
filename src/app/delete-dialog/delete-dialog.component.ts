@@ -10,14 +10,10 @@ export class DeleteDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: string
   ) { }
 
   ngOnInit(): void {
   }
 
-  onNotDeleted(): void {
-    console.log("AMOI")
-    this.dialogRef.close()
-  }
 }

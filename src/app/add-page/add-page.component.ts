@@ -85,7 +85,13 @@ export class AddPageComponent implements OnInit {
     report.dateTime = new Date(report.dateTime).toLocaleString();
     this.rs.getReports().subscribe((data:any) => {
       let reports: PigReport[] = data.data;
+
+      
       for (let i = 0; i < reports.length; i++) {
+        if (reports[i].pigId == report.pigId && reports[i].status == 'Retrieved') {
+          alert("Error already retrieved: report not submitted. Earlier report(s) have already set the pig status to retrieved");
+          return;
+        }
         if (reports[i].pigId == report.pigId && reports[i].pigBreed != report.pigBreed) {
           alert("Error Pig Breed: report not submitted. Earlier report(s) have the same pig id with different pig breed!")
           return;

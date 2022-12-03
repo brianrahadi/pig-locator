@@ -19,6 +19,7 @@ import { LocationPageComponent } from './location-page/location-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { SetRetrievedDialogComponent } from './set-retrieved-dialog/set-retrieved-dialog.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
     LocationPageComponent,
     InfoDialogComponent,
     DeleteDialogComponent,
+    SetRetrievedDialogComponent,
   ],
   // entryComponents: [AddReportDialogComponent, AddReportButtonComponent],
   imports: [

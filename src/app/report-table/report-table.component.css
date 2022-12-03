@@ -8,7 +8,15 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
-.info, .delete {
+.ready {
+  color: lightblue;
+}
+
+.retrieved {
+  color: orange;
+}
+
+.info, .delete, .setToRetrieved {
   cursor: pointer;
 }
 .info {

@@ -28,20 +28,24 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
       Status
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    <td mat-cell *matCellDef="let element" > 
+      <span [ngClass]="element.status == 'Ready for pickup' ? 'ready' : 'retrieved'">{{element.status}} </span>
+      &nbsp;
+      <u *ngIf="element.status == 'Ready for pickup'" class="setToRetrieved" (click)="openSetRetrievedDialog(element.pigId)">Set Retrieved</u>
+    </td>
   </ng-container>
+
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="info">
     <th mat-header-cell *matHeaderCellDef >
-      Info
     </th>
     <td mat-cell *matCellDef="let element"><u class="info" (click)="openInfoDialog(element.id)">Info</u></td>
   </ng-container>
 
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef >
-      Delete
+      
     </th>
     <td mat-cell *matCellDef="let element"><u class="delete" (click)="openDeleteDialog(element.id)">Delete</u></td>
   </ng-container>
