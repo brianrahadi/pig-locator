@@ -1,11 +1,35 @@
-table.mat-table {
+table {
   width: 95%;
   display: table;
   margin: auto;
+  background-color: #393E46;
+  color: white;
+  /* padding: 1em; */
 }
 
-th.mat-sort-header-sorted {
-  color: black;
+th, td, tr {
+  padding: 0.5em;
+  border: 1px solid whitesmoke;
+}
+
+th {
+  color: gray;
+}
+
+th.headerClick u {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.5em;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+th.headerClick u:hover {
+  color: white;
 }
 
 .ready {

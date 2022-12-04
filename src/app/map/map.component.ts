@@ -47,10 +47,6 @@ export class MapComponent implements AfterViewInit {
           alert("Location not added because name is not unique!")
         } else {
           alert("LAH");
-          // locations[locationName] = [e.latlng.lat, e.latlng.lng]))))))))
-          // this.rs.putLocations(locations).subscribe(() => {
-          //   this.router.navigate["/"]
-          // })
         }
 
       }) 

@@ -88,10 +88,11 @@ export class AddPageComponent implements OnInit {
 
       
       for (let i = 0; i < reports.length; i++) {
-        if (reports[i].pigId == report.pigId && reports[i].status == 'Retrieved') {
-          alert("Error already retrieved: report not submitted. Earlier report(s) have already set the pig status to retrieved");
-          return;
-        }
+        // code below not applied because I think this should not error.
+        // if (reports[i].pigId == report.pigId && reports[i].status == 'Retrieved') {
+        //   alert("Error already retrieved: report not submitted. Earlier report(s) have already set the pig status to retrieved");
+        //   return;
+        // }
         if (reports[i].pigId == report.pigId && reports[i].pigBreed != report.pigBreed) {
           alert("Error Pig Breed: report not submitted. Earlier report(s) have the same pig id with different pig breed!")
           return;

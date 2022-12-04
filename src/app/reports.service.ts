@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AfterViewInit, Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export interface DialogResult {
-  value: string,
-  okClicked: boolean
+export interface InfoDialogText {
+  title: string,
+  body: string
 }
 
 export interface PigReport {

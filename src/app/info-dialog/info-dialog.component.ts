@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PigReport } from '../reports.service';
+import { InfoDialogText, PigReport } from '../reports.service';
 
 @Component({
   selector: 'app-info-dialog',
@@ -9,7 +9,7 @@ import { PigReport } from '../reports.service';
 })
 export class InfoDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: PigReport) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: InfoDialogText) { }
 
   ngOnInit(): void {
   }

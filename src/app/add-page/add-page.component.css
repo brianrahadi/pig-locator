@@ -4,49 +4,21 @@ html {
     font-family: 'Lato', sans-serif;
 }
 
-.signUpContainer {
-    background-color: #fff;
-    /* min-height: 300px; */
-    padding: 20px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
-    width: 450px;
-    padding: 20px 35px;
-}
 .wrapper {
-    background-color: #efefee;
-}
-
-.header {
-    padding: 20px 0;
-}
-
-.header h3 {
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 32px;
-    margin: 0;
-    padding-bottom: 0;
-    padding-top: 16px;
-}
-
-.header span {
-    font-size: 14px;
-}
-
-.loginForm {
-    padding-top: 24px;
-}
-
-.wrapper {
-  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 75%;
+  margin: auto;
+
 }
 
 form {
   display: flex;
   flex-direction: column;
+  margin: 25px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
 }
 
 input,
