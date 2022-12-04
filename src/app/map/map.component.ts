@@ -1,10 +1,10 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as L from 'leaflet';
-
-import { icon, Marker } from 'leaflet';
+import { AddLocationDialogComponent } from '../add-location-dialog/add-location-dialog.component';
 import { ReportsService } from '../reports.service';
-import { Location } from '../reports.service';
+import { Location as LocationInterface } from '../reports.service';
 
 const access_token = "pk.eyJ1IjoiYnJpYW5yYWhhZGkiLCJhIjoiY2xhejBxcTE2MHN4YjNwcHV2cWl3MjU3NSJ9.oAMJndUzpnAQaxxIJ18Epg";
 
@@ -18,40 +18,32 @@ const access_token = "pk.eyJ1IjoiYnJpYW5yYWhhZGkiLCJhIjoiY2xhejBxcTE2MHN4YjNwcHV
 export class MapComponent implements AfterViewInit {
   private map;
 
-  constructor(private router: Router, private rs: ReportsService) { }
+  constructor(private router: Router, private rs: ReportsService, public dialog: MatDialog) { }
+
 
   ngAfterViewInit(): void {
     this.map = L.map('map', {
       center: [49.25, -123],
       zoom: 11
     }).addEventListener('click', e => {
-      let locationName = prompt(`Location Information ${e.latlng} \n What location name do you want to name?`)
-      while (locationName.trim() == "") {
-
+      let location: LocationInterface = {
+        name: "",
+        lat: e.latlng.lat,
+        lng: e.latlng.lng
       }
-      if (locationName.trim() == "") {
-        alert("Location name cannot be empty string");
-        return;
-      }
-      this.rs.getLocations().subscribe((data: any) => {
-        let locations = data.data;
-        let locationNames = Object.keys(locations);
-        let uniqueName = true;
-        for (let name of locationNames) {
-          if (name.toLocaleLowerCase().trim() == locationName.toLocaleLowerCase().trim()) {
-            uniqueName = false;
-          }
-        }
-
-        if (!uniqueName) {
-          alert("Location not added because name is not unique!")
-        } else {
-          alert("LAH");
-        }
-
-      }) 
+      this.dialog.open(AddLocationDialogComponent, {
+        data: location
+      }).afterClosed().subscribe(() => {
+        this.rerender();
+      });
+      ;
 
     });
+    this.rerender();
+
+  }
+
+  rerender(): void {
 
     L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${access_token}`, {
       maxZoom: 18,

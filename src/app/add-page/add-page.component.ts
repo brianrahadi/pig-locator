@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { PigReport } from '../reports.service';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
+import { InfoDialogText, PigReport } from '../reports.service';
 import { ReportsService } from '../reports.service';
 import { Location } from '../reports.service';
 
@@ -18,7 +20,7 @@ export class AddPageComponent implements OnInit {
   form: FormGroup
   locations: Location[]
 
-  constructor(private rs: ReportsService, private router: Router, private http: HttpClient) { 
+  constructor(private rs: ReportsService, private router: Router, private http: HttpClient, private dialog: MatDialog) { 
     let formControls = {
       reporterName: new FormControl('',[
         Validators.required
@@ -77,7 +79,12 @@ export class AddPageComponent implements OnInit {
 
   onSubmit(report: PigReport){
     if (new Date(report.dateTime) > new Date()) {
-      alert("Error Date: report not submitted. Report has date and time that is in the future.")
+      let dialogText: InfoDialogText = 
+      {title: `FAIL`, 
+      body: `Error Date: report not submitted. Report has date and time that is in the future.`}
+      this.dialog.open(InfoDialogComponent, {
+        data: dialogText
+      });
       return;
     }
 
@@ -88,13 +95,13 @@ export class AddPageComponent implements OnInit {
 
       
       for (let i = 0; i < reports.length; i++) {
-        // code below not applied because I think this should not error.
-        // if (reports[i].pigId == report.pigId && reports[i].status == 'Retrieved') {
-        //   alert("Error already retrieved: report not submitted. Earlier report(s) have already set the pig status to retrieved");
-        //   return;
-        // }
         if (reports[i].pigId == report.pigId && reports[i].pigBreed != report.pigBreed) {
-          alert("Error Pig Breed: report not submitted. Earlier report(s) have the same pig id with different pig breed!")
+          let dialogText: InfoDialogText = 
+          {title: `FAIL`, 
+          body: `Error Pig Breed: report not submitted. Earlier report(s) have the same pig id with different pig breed!`}
+          this.dialog.open(InfoDialogComponent, {
+            data: dialogText
+          });
           return;
         }
       }

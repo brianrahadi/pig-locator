@@ -1,6 +1,5 @@
-import { AfterViewInit, Component } from '@angular/core';
-import * as L from 'leaflet';
-import { ReportsService } from '../reports.service';
+import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-location-page',

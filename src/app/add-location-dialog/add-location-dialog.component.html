@@ -1,15 +1,14 @@
 <div mat-dialog-content>
   <h2>Add Location Dialog</h2>
-  <p>Location Info:</p>
-  <ul>
-    <!-- <li>Latitude: {{data.lat}}</li>
-    <li>Longitude: {{data.lng}}</li> -->
-  </ul>
+  Location Info: <br>
+  - Latitude: {{data.lat}} <br>
+  - Longitude: {{data.lng}}
+
   <p>Please enter a unique location name </p>
   <mat-form-field appearance="fill">
     <mat-label>Location</mat-label>
-    <input matInput [(ngModel)]="data" type="text" value="">
+    <input matInput [(ngModel)]="data.name" type="text" value="">
   </mat-form-field>
-  
-  <button mat-button [mat-dialog-close]="data">Ok</button>
+
+  <button mat-button (click)="addLocation()">Ok</button>
 </div>

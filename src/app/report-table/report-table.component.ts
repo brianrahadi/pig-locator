@@ -1,12 +1,9 @@
-import { AfterContentChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort, Sort} from '@angular/material/sort';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatSort} from '@angular/material/sort';
 import { InfoDialogText, PigReport, ReportsService } from '../reports.service';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { Router } from '@angular/router';
 import { SetRetrievedDialogComponent } from '../set-retrieved-dialog/set-retrieved-dialog.component';
 
 @Component({
