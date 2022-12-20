@@ -1,4 +1,6 @@
 # PigLocator
+![pig-locator-img](./pig-locator-img.png)
+
 View website at [pig-locator.brianrahadi.com](https://pig-locator.brianrahadi.com/) <br>
 See [Youtube demo](https://www.youtube.com/watch?v=PiQZpUfYscM&ab_channel=BrianRahadi) <br>
 Tech Stack: Angular, TypeScript, Leaflet, Mapbox API, Data Manager API
